@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>仪表盘连接测试</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f4f7f5; color: #193d32; font: 16px/1.6 system-ui, sans-serif; }
+    main { width: min(100%, 38rem); margin: auto; padding: clamp(20px, 6vw, 52px); }
+    h1 { font-size: 24px; } li { padding: 6px 0; }
+    button { font: inherit; padding: 6px 16px; color: white; background: #19664d; border: none; border-radius: 6px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>仪表盘连接测试</h1>
+    <ol aria-live="polite">
+      <li>页面已打开</li>
+      <li id="script">等待脚本启动</li>
+      <li id="host">等待飞书仪表盘</li>
+    </ol>
+    <button id="save" hidden>保存测试组件</button>
+    <p id="result" role="status"></p>
+  </main>
+  <script src="./probe.bundle.js"></script>
+</body>
+</html>
