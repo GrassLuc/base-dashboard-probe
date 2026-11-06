@@ -59,10 +59,15 @@ function draw() {
     byId('cells').append(row);
     appendCell(row,'th',group.name);
     const days = [...group.days.keys()].sort();
+    const firstWork = days.find(day => group.days.get(day).work > 0);
+    const lastActivity = days.filter(day => {
+      const entry = group.days.get(day);
+      return entry.work > 0 || entry.total !== 0 || entry.closure;
+    }).at(-1);
     let running = days.filter(d=>d<visible[0]).reduce((sum,d)=>sum+group.days.get(d).total,0);
     for (const day of visible) {
       const cell = group.days.get(day);
-      const within = day >= days[0] && day <= days.at(-1);
+      const within = firstWork && day >= firstWork && day <= lastActivity;
       running += cell?.total ?? 0;
       const pct = group.plan > 0 ? Math.round(running / group.plan * 100) : null;
       const state = cell?.work > 0 ? 'work' : cell && (cell.total !== 0 || cell.closure) ? 'adjust' : within ? 'gap' : '';
